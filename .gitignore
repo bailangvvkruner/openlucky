@@ -1,0 +1,18 @@
+.tools/
+.omo/
+node_modules/
+playwright-report/
+test-results/
+openlucky.json
+*.log
+
+# Lucky audit and observation artifacts
+browser-audit/
+lucky-assets/
+lucky-observation/
+docs/
+inspect-lucky.mjs
+lucky-*.js
+lucky-*.html
+lucky-*.json
+lucky-observations.json

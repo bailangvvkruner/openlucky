@@ -1,0 +1,12 @@
+{
+  "name": "openlucky-workspace",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:frontend": "node --check web/static/js/api.js && node --check web/static/js/router.js && node --check web/static/js/app.js && node --check web/static/js/views/login.js && node --check web/static/js/views/dashboard.js",
+    "test:browser": "playwright test tests/browser/openlucky-smoke.spec.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}
