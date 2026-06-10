@@ -2,6 +2,8 @@
 
 OpenLucky is a clean-room, open-source admin appliance inspired by the operational shape of Lucky-style home-lab gateways. It is not a Lucky fork and does not include Lucky source code, compiled frontend bundles, CSS, icons, images, UI copy, private persistence formats, or proprietary assets.
 
+OpenLucky is also not a claim of official Lucky route-for-route parity. The repository contains an MVP implementation plus a public research trail explaining how the observed route/API surface was inventoried and how the current boundary was chosen.
+
 ## MVP Scope
 
 - Single Go binary using CloudWeGo Hertz.
@@ -10,6 +12,20 @@ OpenLucky is a clean-room, open-source admin appliance inspired by the operation
 - Password login with short-lived admin tokens.
 - MVP modules for status, logs, settings, module registry, DDNS/Web/port-forward/SSL/Cron list surfaces.
 - Explicit `501 Not Implemented` stubs for high-risk modules such as Docker, terminal/SFTP, file services, tunnels, WAF, storage integrations, and Wanji-specific surfaces.
+
+## Route Parity
+
+The reverse-engineering pass observed a broad Lucky route surface, including core pages, network services, storage services, terminal/SFTP, Docker, tunnel managers, security modules, database backup, and Wanji admin surfaces.
+
+The current OpenLucky MVP intentionally implements only the conservative subset:
+
+- auth, config, status, logs, module registry, and static admin shell,
+- read-only MVP list endpoints for DDNS, Web service rules, port forwards, SSL, and Cron,
+- explicit stubs for modules that require separate threat models before they should execute real work.
+
+That means OpenLucky shows the observed shape of the appliance without pretending that dangerous modules are complete or safe.
+
+For the public clean-room research record, see `docs/research/clean-room-reverse-engineering.md`.
 
 ## Safety Model
 
@@ -49,4 +65,6 @@ node --check web/static/js/views/dashboard.js
 
 ## Clean-Room Notes
 
-The planning artifacts in `docs/superpowers/plans/` summarize observed behavior, route names, and API risk taxonomy from an authorized audit. Those observations are used only as behavior requirements. OpenLucky implementation files are original code and should stay free of copied Lucky bundles, styles, images, icon packs, generated code, or private strings.
+The public research record in `docs/research/` summarizes observed behavior, route names, API risk taxonomy, safety classification, and Superpowers-style planning decisions from an authorized audit. Those observations are used only as behavior requirements. OpenLucky implementation files are original code and should stay free of copied Lucky bundles, styles, images, icon packs, generated code, or private strings.
+
+When adding modules, document whether each route is observed, implemented, or intentionally stubbed. Do not turn a stub into an active handler without tests and a module-specific threat model.

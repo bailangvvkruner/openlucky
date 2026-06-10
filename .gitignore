@@ -10,7 +10,9 @@ openlucky.json
 browser-audit/
 lucky-assets/
 lucky-observation/
-docs/
+docs/*
+!docs/research/
+!docs/research/**
 inspect-lucky.mjs
 lucky-*.js
 lucky-*.html
